@@ -241,38 +241,50 @@
 //     </div>
 //   );
 // }
-//Signin
-
-// PRAKASH CODE=========================================
-
-// import React, { useState } from "react";
-// import { useContext } from "react";
+//Signin Desktop version
+// import React, { useState, useContext } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import { UserContext } from "../context/UserContext";
+// import axios from "axios";
 
-// export default function SignIn({ setUser }) {
+// export default function SignIn() {
 //   const [formData, setFormData] = useState({ email: "", password: "" });
 //   const [showPassword, setShowPassword] = useState(false);
 //   const [error, setError] = useState("");
 //   const navigate = useNavigate();
 
-//   const { userInfo, setUserInfo } = useContext(UserContext);
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (
-//       formData.email === "sample@gmail.com" &&
-//       formData.password === "12345"
-//     ) {
-//       setUserInfo({
-//         userName: "Sample User",
-//         userId: "id2332451",
-//         email: "sample@gmail.com",
-//       });
-//       navigate("/");
-//     } else {
-//       alert("Wrong credentials!");
-//     }
-//   };
+//   const { setUserInfo } = useContext(UserContext);
+
+//   const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setError("");
+
+//   try {
+//     const res = await axios.post(
+//       "http://localhost:8000/login",
+//       {
+//         email: formData.email,
+//         password: formData.password,
+//       },
+//       { withCredentials: true }
+//     );
+
+//     const { userId, email, access_token } = res.data;
+
+//     // ✅ Save to context (already correct)
+//     setUserInfo({ userId, email, token: access_token });
+
+//     // ✅ ALSO save to localStorage
+//     localStorage.setItem("token", access_token);
+//     localStorage.setItem("userId", userId);
+//     localStorage.setItem("userEmail", email);
+
+//     navigate("/afterhome");
+//   } catch (err) {
+//     console.error(err);
+//     setError("Invalid email or password");
+//   }
+// };
 
 //   return (
 //     <div>
@@ -283,7 +295,7 @@
 //         <div className="w-full max-[1000px]:p-[20px] max-[1000px]:flex-col max-[1000px]:gap-[50px] min-h-screen bg-[#000000b2] flex items-center justify-between pt-[44px] pr-[80px] pb-[44px] pl-[80px]">
 //           <div className=" max-w-[631px] min-h-[455px] text-center flex flex-col items-center justify-between gap-3">
 //             <h3 className="w-full min-h-[192px] font-semibold min-[500px]:text-center text-[28px] min-[631px]:text-[44px] leading-[36px] min-[500px]:leading-[64px] text-white mb-2.5">
-//               Redesign your
+//               Redesign your{" "}
 //               <span className="block text-[#009A98] leading-[100%] text-[44px] min-[500px]:inline min-[500px]:text-[44px] font-semibold">
 //                 "Interiors"
 //               </span>
@@ -348,7 +360,7 @@
 //                 />
 //                 <span
 //                   className="cursor-pointer"
-//                   onClick={() => setShowPassword((prev) => !prev)}
+//                   onClick={() => setShowPassword(!showPassword)}
 //                 >
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
@@ -359,6 +371,10 @@
 //                   >
 //                     <path
 //                       d="M24.0705 7.51211C21.3277 4.35156 17.5375 0.71875 12.5 0.71875C10.4656 0.71875 8.60078 1.29395 6.63301 2.52305C4.97402 3.56445 3.27266 5.02969 0.935547 7.43945L0.875 7.5L1.28066 7.91777C4.6168 11.3326 7.49883 14.2812 12.5 14.2812C14.71 14.2812 16.8533 13.5607 19.0512 12.0773C20.9221 10.8119 22.5145 9.20742 23.792 7.91172L24.125 7.57871L24.0705 7.51211ZM12.5 12.3438C9.82988 12.3438 7.65625 10.1701 7.65625 7.5C7.65625 4.82988 9.82988 2.65625 12.5 2.65625C15.1701 2.65625 17.3438 4.82988 17.3438 7.5C17.3438 10.1701 15.1701 12.3438 12.5 12.3438Z"
+//                       fill="#BEBCBC"
+//                     />
+//                     <path
+//                       d="M12.1609 5.73203C12.1609 5.31426 12.282 4.9207 12.4939 4.59375C10.8895 4.59375 9.59375 5.90156 9.59375 7.51211C9.59375 9.12266 10.8955 10.4244 12.4939 10.4244C14.0924 10.4244 15.4002 9.12266 15.4002 7.51211C15.0732 7.72402 14.6797 7.84512 14.2619 7.84512C13.1055 7.83906 12.1609 6.89453 12.1609 5.73203Z"
 //                       fill="#BEBCBC"
 //                     />
 //                   </svg>
@@ -393,7 +409,7 @@
 //               sign up with
 //             </p>
 //             <div className="max-w-[458px] flex items-center justify-between gap-2.5 w-full">
-//               <a href="#">
+//               <a href="http://localhost:8000/login/google">
 //                 <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center">
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
@@ -432,7 +448,7 @@
 //                   </svg>
 //                 </button>
 //               </a>
-//               <a href="#">
+//               <a href="http://localhost:8000/login/apple">
 //                 <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center">
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
@@ -448,7 +464,7 @@
 //                   </svg>
 //                 </button>
 //               </a>
-//               <a href="#">
+//               <a href="http://localhost:8000/login/facebook">
 //                 <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center">
 //                   <svg
 //                     xmlns="http://www.w3.org/2000/svg"
@@ -502,33 +518,48 @@
 //   );
 // }
 
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import axios from "axios";
 import logoImg from "../assets/Logo.png";
 
-export default function SignIn({ setUser }) {
+export default function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { userInfo, setUserInfo } = useContext(UserContext);
-  const handleSubmit = (e) => {
+  const { setUserInfo } = useContext(UserContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      formData.email === "sample@gmail.com" &&
-      formData.password === "12345"
-    ) {
-      setUserInfo({
-        userName: "Sample User",
-        userId: "id2332451",
-        email: "sample@gmail.com",
-      });
-      navigate("/");
-    } else {
-      alert("Wrong credentials!");
+    setError("");
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        { withCredentials: true }
+      );
+
+      const { userId, email, access_token } = res.data;
+
+      // ✅ Save to context (already correct)
+      setUserInfo({ userId, email, token: access_token });
+
+      // ✅ ALSO save to localStorage
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("userEmail", email);
+
+      navigate("/afterhome");
+    } catch (err) {
+      console.error(err);
+      setError("Invalid email or password");
     }
   };
 
@@ -540,45 +571,90 @@ export default function SignIn({ setUser }) {
         style={{ backgroundImage: 'url("/logIn/bg-img.jpeg")' }}
 
       >
-        {/* Logo container - only shows below 440px */}
-       <div className="absolute top-[35px] left-[24px] bg-white p-[2px] rounded-[3px] block min-[441px]:hidden">
-  <img
-    src={logoImg}
-    alt="logo"
-    className="w-[100px] h-[30px] object-contain"
-  />
-</div>
+       {window.innerWidth < 769 && (
+  <div
+    style={{
+      position: 'absolute',
+      top: '35px',
+      
+      left: window.innerWidth < 441 ? '24px' : '60px', // Change this value as needed
+      backgroundColor: 'white',
+      padding: '2px',
+      borderRadius: '3px',
+      width: '100px',
+      height: '30px',
+      opacity: 1,
+      // left: '44px',
+    }}
+  >
+       <img
+            src={logoImg}
+            alt="logo"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              borderRadius: '3px',
+            }}
+          />
 
+         </div>
+       )}
 
-
-        <div className="w-full flex flex-wrap items-center justify-center min-h-screen bg-[#000000b2] p-5 sm:flex-nowrap sm:justify-between sm:px-[80px] sm:py-[44px]">
-
+        <div className="w-full max-[1000px]:p-[20px] max-[1000px]:flex-col max-[1000px]:gap-[50px] min-h-screen bg-[#000000b2] flex items-center justify-between pt-[44px] pr-[80px] pb-[44px] pl-[80px]">
 
           <div className="max-w-[631px] min-h-[455px] text-center flex flex-col items-center justify-between gap-3">
-            {/* Mobile-only text (top) */}
-            <h3 className="hidden max-[440px]:block font-semibold text-[24px] text-[#009A98] leading-[100%] text-center
-                max-[440px]:absolute max-[440px]:top-[120px] max-[440px]:left-0 max-[440px]:right-0">
-              Welcome Back!
-            </h3>
-            {/* <p className="hidden max-[440px]:block 
-  max-[440px]:font-[400]
-  max-[440px]:text-[14px]
-  max-[440px]:leading-[100%]
-  max-[440px]:tracking-[0]
-  max-[440px]:text-center
-  max-[440px]:w-[360px]
-  max-[440px]:h-[17px]
-  max-[440px]:left-1/2 
-  max-[440px]:translate-x-[-50%]
-  font-medium text-[#ffffff] 
-  absolute bottom-[320px]">
-              Log in and bring your dream space to life
-            </p> */}
+            
+            <h3
+  className="
+    hidden
+    max-[440px]:block 
+    max-[440px]:absolute max-[440px]:top-[120px] max-[440px]:left-0 max-[440px]:right-0
+    max-[440px]:font-semibold max-[440px]:text-[24px] max-[440px]:text-[#009A98] max-[440px]:leading-[100%] max-[440px]:text-center
+
+    min-[441px]:max-[768px]:block 
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[34px]
+    min-[441px]:max-[768px]:text-[28px]
+    min-[441px]:max-[768px]:leading-[100%]
+    min-[441px]:max-[768px]:text-[#009A98]
+    min-[441px]:max-[768px]:font-semibold
+    min-[441px]:max-[768px]:text-center
+    min-[441px]:max-[768px]:pt-[100px]
+    
+  "
+>
+  Welcome Back!
+
+  
+        <p
+  className="
+    hidden 
+    min-[441px]:max-[768px]:block 
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[19px]
+    min-[441px]:max-[768px]:text-[16px]
+    min-[441px]:max-[768px]:leading-[100%]
+    min-[441px]:max-[768px]:font-['Inter']
+    min-[441px]:max-[768px]:font-[400]
+    min-[441px]:max-[768px]:text-[#FFFFFF]
+    min-[441px]:max-[768px]:text-center
+    min-[441px]:max-[768px]:mt-[15px]
+  "
+>
+  Login and bring your dream space to life
+</p>
+
+
+</h3>
+
+
 
 
             {/* Heading with adjusted spacing */}
-            <h3
-              className="w-full min-h-[192px] font-semibold text-[28px] leading-[36px] text-white 
+           <h3
+  className="
+    w-full min-h-[192px] font-semibold text-[28px] leading-[36px] text-white 
     min-[500px]:text-center min-[631px]:text-[44px] min-[500px]:leading-[64px]
 
     /* Mobile <440px styles */ 
@@ -590,33 +666,95 @@ export default function SignIn({ setUser }) {
     max-[440px]:text-[16px]
     max-[440px]:leading-[160%]
     max-[440px]:font-['Inter']
-    max-[440px]:font-semibold"
-            >
-              <div className="max-[440px]:w-full">
-                Redesign your{" "}
-                <span
-                  className="inline text-[#009A98] leading-[100%] text-[44px] font-semibold
-        min-[500px]:text-[44px]
-        max-[440px]:text-[#FFD56B]
-        max-[440px]:text-[22px]
-        max-[440px]:leading-[100%]
-        max-[440px]:tracking-[0%]
-        max-[440px]:font-['Inter']"
-                >
-                  "Interiors"
-                </span>
-              </div>
+    max-[440px]:font-semibold
 
-              <div className="max-[440px]:mt-[4px]">
-                with Stackly in less than 25 seconds.
-              </div>
-            </h3>
-            <Link
+    /* Tablet 441px–768px styles */
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[45px]
+    min-[441px]:max-[768px]:text-[16px]
+    min-[441px]:max-[768px]:leading-[160%]
+    min-[441px]:max-[768px]:font-semibold
+    min-[441px]:max-[768px]:text-center
+    min-[441px]:max-[768px]:font-['Inter']
+    min-[441px]:max-[768px]:pb[55px]
+     min-[441px]:max-[768px]:pt-[90px] 
+  "
+>
+ <div
+  className="
+    w-full text-center
+
+  /* Tablet */
+      min-[441px]:max-[768px]:text-[22px]
+
+    /* Mobile */
+    max-[440px]:w-full
+  "
+>
+  Redesign your{" "}
+  <span
+    className="
+      inline font-semibold text-[#009A98] leading-[100%]
+      min-[500px]:text-[44px]
+
+      /* Tablet */
+      min-[441px]:max-[768px]:text-[16px]
+      min-[441px]:max-[768px]:leading-[100%]
+      min-[441px]:max-[768px]:text-[#FFD56B]
+      min-[441px]:max-[768px]:font-['Inter']
+
+      /* Mobile */
+      max-[440px]:text-[#FFD56B]
+      max-[440px]:text-[22px]
+      max-[440px]:leading-[100%]
+      max-[440px]:font-['Inter']
+    "
+  >
+    "Interiors"
+  </span>
+</div>
+
+  <div
+    className="
+      max-[440px]:mt-[4px]
+
+      /* Tablet */
+      min-[441px]:max-[768px]:text-[22px]
+     min-[441px]:max-[768px]:mt-[9px]
+    "
+  >
+    with Stackly in less than 25 seconds.
+  </div>
+</h3>
+
+          <Link
   to="/sign-up"
-  className="w-full max-w-[435px] min-h-[55px] rounded-[12px] border cursor-pointer font-medium text-base text-white bg-[#0000004d] mt-[50px] pt-[10px] pr-[20px] pb-[10px] pl-[20px] border-solid border-white flex justify-center items-center gap-[10px]
+  className="
+    w-full max-w-[435px] min-h-[55px] rounded-[12px] border cursor-pointer font-medium text-base text-white bg-[#0000004d] mt-[50px] pt-[10px] pr-[20px] pb-[10px] pl-[20px] border-solid border-white flex justify-center items-center gap-[10px]
     hover:bg-[#00000080] hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,184,212,0.5)]
     transition-all duration-300 ease-in-out
-    max-[440px]:w-[360px] max-[440px]:h-[44px] max-[440px]:rounded-[8px] max-[440px]:border-[1px] max-[440px]:px-5 max-[440px]:py-2.5 max-[440px]:gap-[10px]"
+
+    /* Mobile */
+    max-[440px]:w-[360px] 
+    max-[440px]:h-[44px] 
+    max-[440px]:rounded-[8px] 
+    max-[440px]:border-[1px] 
+    max-[440px]:px-5 
+    max-[440px]:py-2.5 
+    max-[440px]:gap-[10px]
+
+    /* Tablet */
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[52px]
+    min-[441px]:max-[768px]:pt-[10px]
+    min-[441px]:max-[768px]:pr-[20px]
+    min-[441px]:max-[768px]:pb-[10px]
+    min-[441px]:max-[768px]:pl-[20px]
+    min-[441px]:max-[768px]:gap-[10px]
+    min-[441px]:max-[768px]:rounded-[8px]
+    min-[441px]:max-[768px]:border-[1px]
+    min-[441px]:max-[768px]:max-w-[608px]  /* ✅ This line fixes it */
+  "
   role="button"
   aria-label="Start Free Trial"
 >
@@ -626,71 +764,172 @@ export default function SignIn({ setUser }) {
 </Link>
 
 
-            <p className="font-medium text-[16px] w-full max-w-[596px] min-h-[19px] leading-[100%] min-[500px]:text-base pt-5 text-[#ffffff] text-center">
-              Get started with 10 free outputs – No credit card needed!
-            </p>
+           <p
+  className="
+    font-['Inter']
+    font-medium
+    text-[16px]
+    w-full
+    max-w-[596px]
+    min-h-[19px]
+    leading-[100%]
+    min-[500px]:text-base
+    pt-5
+    text-[#ffffff]
+    text-center
+
+    /* Tablet-specific overrides */
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[19px]
+    min-[441px]:max-[768px]:text-[16px]
+    min-[441px]:max-[768px]:font-normal
+    min-[441px]:max-[768px]:font-['Inter']
+     min-[441px]:max-[768px]:pt-[1px]
+  "
+>
+  Get started with 10 free outputs – No credit card needed!
+</p>
+
           </div>
 
-          <div
-className="max-[1000px]:w-full max-w-[529px] min-h-[608px] bg-[#000000b2] flex flex-col gap-10 items-center justify-center pt-[28px] pr-[32px] pb-[28px] pl-[32px] rounded-[10px]
-  max-[440px]:bg-transparent max-[440px]:border-none max-[440px]:mt-[40px]
-  max-[410px]:w-[360px] max-[410px]:h-[313px] max-[410px]:gap-[32px]">
+<div
+  className="
+    max-[1000px]:w-full
+    max-w-[529px]
+    min-h-[608px]
+    flex flex-col items-center justify-center
+    gap-10
+    bg-[#0000004d]
+    pt-[28px] pr-[32px] pb-[28px] pl-[32px]
+    rounded-[10px]
+    max-[440px]:border-none
+
+    /* Tablet overrides */
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:max-w-[608px]
+    min-[441px]:max-[768px]:h-[448px]
+    min-[441px]:max-[768px]:min-h-[448px]
+    min-[441px]:max-[768px]:gap-[32px]
+    max-[768px]:bg-transparent
+  "
+>
+
+
 
             <h3 className="font-semibold text-[24px] text-[#009A98] leading-[100%] text-center
-              max-[440px]:hidden">
+              max-[769px]:hidden">
               Welcome Back!
             </h3>
 
-            <p className="hidden max-[440px]:block 
-            font-medium text-[#ffffff] absolute 
-            max-[440px]:top-[220px] max-[440px]:left-1/2 max-[440px]:translate-x-[-50%]
-            max-[440px]:font-[400] max-[440px]:text-[14px] max-[440px]:leading-[100%] max-[440px]:tracking-[0]
-            max-[440px]:text-center max-[440px]:w-[360px] max-[440px]:h-[17px]">
+           <p className="hidden max-[440px]:block 
+  font-medium text-[#ffffff] absolute 
+  max-[440px]:top-[220px] max-[440px]:left-1/2 max-[440px]:translate-x-[-50%]
+  max-[440px]:font-[400] max-[440px]:text-[14px] max-[440px]:leading-[100%] max-[440px]:tracking-[0]
+  max-[440px]:text-center max-[440px]:w-[360px] max-[440px]:h-[17px]">
               Log in and bring your dream space to life
             </p>
-
             {error && (
               <p className="text-red-500 text-center max-w-[465px] w-full">
                 {error}
               </p>
             )}
 
-           <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-5 items-center justify-center w-full"
-            >
-              <input
-                className="max-w-[465px] min-h-[44px] w-full bg-[white] p-[15px] placeholder:text-base placeholder:font-normal placeholder:text-[#2a2a2a] rounded-[8px]"
-                type="email"
-                placeholder="Email"
-                required
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
-              />
-              <div className="max-w-[465px] min-h-[44px] w-full bg-[white] flex items-center justify-center p-[15px] rounded-[5px]">
-                 <input
-                  className="bg-white flex-1 placeholder:text-base placeholder:font-normal placeholder:text-[#2a2a2a]"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  required
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      password: e.target.value,
-                    }))
-                  }
-                />
+    <form
+  onSubmit={handleSubmit}
+  className="flex flex-col gap-5 items-center justify-center w-full px-4
+             min-[441px]:max-[768px]:w-[608px]"
+>
+
+    <input
+  className="
+    w-full
+    min-h-[44px] 
+    bg-white 
+    p-[15px] 
+    placeholder:text-base 
+    placeholder:font-normal 
+    placeholder:text-[#2a2a2a] 
+    rounded-[8px]
+
+    /* Mobile */
+    max-[440px]:w-[360px] 
+    max-[440px]:h-[44px] 
+    max-[440px]:rounded-[8px]
+
+    /* Tablet */
+    min-[441px]:max-[768px]:w-[608px] 
+    min-[441px]:max-[768px]:h-[44px] 
+    min-[441px]:max-[768px]:rounded-[8px]
+
+    /* Desktop */
+    min-[769px]:w-[456px]
+    min-[769px]:max-w-[465px]
+  "
+  type="email"
+  placeholder="Email"
+  required
+  value={formData.email}
+  onChange={(e) =>
+    setFormData((prev) => ({ ...prev, email: e.target.value }))
+  }
+/>
+
+
+           {/* Password Field */}
+<div
+  className="
+    relative 
+    w-full
+
+    /* Mobile */
+    max-[440px]:w-[360px]
+
+    /* Tablet */
+    min-[441px]:max-[768px]:w-[608px]
+
+    /* Desktop */
+    min-[769px]:w-[456px] min-[769px]:max-w-[465px]
+  "
+>
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    required
+    value={formData.password}
+    onChange={(e) =>
+      setFormData((prev) => ({ ...prev, password: e.target.value }))
+    }
+    className="
+      w-full 
+      min-h-[44px] 
+      bg-white 
+      p-[15px] 
+      pr-[45px] 
+      rounded-[8px] 
+      border 
+      border-[#e0e0e0] 
+      focus:border-[#009A98] 
+      focus:outline-none 
+      placeholder:text-base 
+      placeholder:font-normal 
+      placeholder:text-[#2a2a2a] 
+      text-[#2a2a2a] 
+      text-base 
+      font-normal
+    "
+  />
+
+
+
+                {/* Eye Icon */}
                 <span
-                  className="cursor-pointer"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="15"
+                    width="24"
+                    height="14"
                     viewBox="0 0 25 15"
                     fill="none"
                   >
@@ -706,43 +945,154 @@ className="max-[1000px]:w-full max-w-[529px] min-h-[608px] bg-[#000000b2] flex f
                 </span>
               </div>
 
-              <p className="max-w-[465px] w-full text-base text-[#b0b0b0] font-normal text-end">
-                <Link
-                  className="no-underline font-medium text-[#009A98]"
-                  to="/HeroForgetPg"
-                >
-                  Forget Password?
-                </Link>
-              </p>
+              {/* Rest of your form remains the same */}
+              <p
+  className="
+    w-[456px] 
+    max-w-[465px] 
+    max-[440px]:w-[360px] 
+    min-[441px]:max-[768px]:w-[608px]
+    text-base 
+    text-[#b0b0b0] 
+    font-normal 
+    text-end
 
-              <button
-                type="submit"
-                className="w-[456px] bg-gradient-to-l from-[#00B0BA] via-[#000000] to-[#007B82] text-white cursor-pointer font-bold max-w-[465px] p-[15px] rounded-[5px]
-            max-[440px]:w-[358px] max-[440px]:h-[41px] max-[440px]:rounded-[8px]
-            max-[440px]:py-[3px] max-[440px]:px-[157px] max-[440px]:gap-[10px]
-            max-[440px]:flex max-[440px]:items-center max-[440px]:justify-center
-            max-[440px]:whitespace-nowrap"
-              >
-                LOGIN
-              </button>
+    min-[441px]:max-[768px]:-mt-[16px] 
+    min-[441px]:max-[768px]:ml-auto
+    min-[441px]:max-[768px]:pr-0
+  "
+>
+  <Link
+    to="/HeroForgetPg"
+    className="
+      no-underline 
+      text-[#009A98] 
+      font-medium
+      min-[441px]:max-[768px]:text-[16px]
+      min-[441px]:max-[768px]:leading-[100%]
+    "
+  >
+    Forget Password?
+  </Link>
+</p>
+<button
+  type="submit"
+  className="
+    w-full bg-gradient-to-l from-[#00B0BA] via-[#000000] to-[#007B82] 
+    text-white cursor-pointer font-bold p-[15px] rounded-[5px]
+
+    max-[440px]:w-[358px] max-[440px]:h-[41px] max-[440px]:rounded-[8px]
+    max-[440px]:py-[3px] max-[440px]:px-[157px] max-[440px]:gap-[10px]
+    max-[440px]:flex max-[440px]:items-center max-[440px]:justify-center
+    max-[440px]:whitespace-nowrap
+
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:h-[46px]
+    min-[441px]:max-[768px]:rounded-[8px]
+  "
+>
+  LOGIN
+</button>
+
+
             </form>
-            <div className="w-full max-w-[458px] min-h-[19px] flex justify-between items-center p-[15px]">
-              <div className="w-[202px] border-[1px] border-solid border-[#B0B0B0]"></div>
-              <p className="font-medium text-base text-[#b0b0b0] text-[16px] leading-[100%] px-3">
-                or
-              </p>
-              <div className="w-[202px] border-[1px] border-solid border-[#B0B0B0]"></div>
+           
+<div
+  className="
+    w-[458px] min-h-[19px] flex justify-between items-center p-[15px]
+
+    /* Mobile styles (<441px) */
+    max-[440px]:w-[360px]
+    max-[440px]:gap-[18px]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[608px]
+    min-[441px]:max-[768px]:gap-[18px]
+  "
+>
+
+                         <div
+                className="
+    w-[202px] border border-solid border-[#B0B0B0]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[276.5px]
+    min-[441px]:max-[768px]:h-0
+    min-[441px]:max-[768px]:border
+  "
+              ></div>
+
+              <p
+  className="
+    font-medium text-base text-[#b0b0b0] leading-[100%] px-3
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[19px]
+    min-[441px]:max-[768px]:h-[19px]
+    min-[441px]:max-[768px]:text-[16px]
+    min-[441px]:max-[768px]:leading-[100%]
+  "
+>
+  or
+</p>
+
+             <div
+  className="
+    w-[202px] border border-solid border-[#B0B0B0]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[276.5px]
+    min-[441px]:max-[768px]:h-[0px]
+    min-[441px]:max-[768px]:border-[1px]
+  "
+></div>
             </div>
 
-            <p className="font-semibold max-w-[458px] text-[16px] leading-[100%] text-center text-base text-[#b0b0b0]">
-              sign up with
-            </p>
-            <div className="max-w-[458px] flex items-center justify-between gap-2.5 w-full
-              max-[440px]:flex-row max-[440px]:w-[360px] max-[440px]:h-[44px] max-[440px]:gap-[24px]">
+                    <p
+  className="
+    font-semibold max-w-[458px] text-[16px] leading-[100%] text-center text-[#b0b0b0]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:max-w-[608px]
+    min-[441px]:max-[768px]:text-[14px]
+    min-[441px]:max-[768px]:leading-[100%]
+    min-[441px]:max-[768px]:text-center
+  "
+>
+  sign up with
+</p>
+               <div
+  className="
+    max-w-[458px] flex items-center justify-between gap-2.5 w-full
+
+    max-[440px]:w-[360px]
+    max-[440px]:h-[44px]
+    max-[440px]:gap-[24px]
+
+    min-[441px]:max-[768px]:max-w-[608px]
+    min-[441px]:max-[768px]:h-[44px]
+    min-[441px]:max-[768px]:gap-[24px]
+    min-[441px]:max-[768px]:justify-center
+  "
+>
               <a href="http://localhost:8000/login/google">
-                <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
-              max-[440px]:flex-row max-[440px]:w-[104px] max-[440px]:h-[44px] 
-              max-[440px]:rounded-[8px] max-[440px]:p-[10px]">
+                          <button
+  className="
+    w-[136px] h-[44px] bg-white rounded cursor-pointer 
+    shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
+
+    max-[440px]:w-[104px]
+    max-[440px]:h-[44px]
+    max-[440px]:rounded-[8px]
+    max-[440px]:p-[10px]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[186.6667px]
+    min-[441px]:max-[768px]:h-[44px]
+    min-[441px]:max-[768px]:rounded-[8px]
+    min-[441px]:max-[768px]:p-[10px]
+  "
+>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -781,9 +1131,24 @@ className="max-[1000px]:w-full max-w-[529px] min-h-[608px] bg-[#000000b2] flex f
                 </button>
               </a>
               <a href="http://localhost:8000/login/apple">
-                <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
-              max-[440px]:w-[104px] max-[440px]:h-[44px]
-              max-[440px]:rounded-[8px] max-[440px]:p-[10px]">
+                            <button
+  className="
+    w-[136px] h-[44px] bg-white rounded cursor-pointer 
+    shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
+
+    max-[440px]:w-[104px]
+    max-[440px]:h-[44px]
+    max-[440px]:rounded-[8px]
+    max-[440px]:p-[10px]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:w-[186.6667px]
+    min-[441px]:max-[768px]:h-[44px]
+    min-[441px]:max-[768px]:rounded-[8px]
+    min-[441px]:max-[768px]:p-[10px]
+  "
+>
+
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -799,16 +1164,32 @@ className="max-[1000px]:w-full max-w-[529px] min-h-[608px] bg-[#000000b2] flex f
                 </button>
               </a>
               <a href="http://localhost:8000/login/facebook">
-                <button className="w-[136px] h-[44px] bg-white rounded cursor-pointer shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
-              max-[440px]:w-[104px] max-[440px]:h-[44px]
-              max-[440px]:rounded-[8px] max-[440px]:p-[10px]">
+                       <button
+                  className="
+    w-[136px] h-[44px] bg-white rounded cursor-pointer 
+    shadow-[2px_2px_5px_#00000014] p-2.5 flex items-center justify-center
+
+    max-[440px]:flex-row
+    max-[440px]:w-[104px]
+    max-[440px]:h-[44px]
+    max-[440px]:rounded-[8px]
+    max-[440px]:p-[10px]
+
+    /* Tablet styles (441px–768px) */
+    min-[441px]:max-[768px]:flex-row
+    min-[441px]:max-[768px]:w-[186.6667px]
+    min-[441px]:max-[768px]:h-[44px]
+    min-[441px]:max-[768px]:rounded-[8px]
+    min-[441px]:max-[768px]:p-[10px]
+  "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                  >
+                  > 
                     <g clipPath="url(#clip0_36_50)">
                       <mask
                         id="mask0_36_50"
@@ -853,3 +1234,4 @@ className="max-[1000px]:w-full max-w-[529px] min-h-[608px] bg-[#000000b2] flex f
     </div>
   );
 }
+
