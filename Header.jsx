@@ -325,8 +325,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 
-import logoImg from "../assets/Logo.png";
+import logoImg from "../assets/Logo1.png";
 import { UserContext } from "../context/UserContext";
+import arrow from "../assets/home/Arrow.png"
 
 export default function Header() {
   const navigate = useNavigate();
@@ -335,10 +336,10 @@ export default function Header() {
   const { userInfo, setUserInfo } = useContext(UserContext);
 
   // ✅ Track screen size
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 441);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 769);
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 441);
+      setIsSmallScreen(window.innerWidth < 769);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -355,7 +356,6 @@ export default function Header() {
     "/resetpopup",
     "/signuppopup",
     "/heroforgetpg",
-    // "/contact",
   ];
   const isHiddenPage = hiddenPages.includes(location.pathname.toLowerCase());
 
@@ -364,77 +364,88 @@ export default function Header() {
 
   // ✅ Hide header for small screens on specific pages
   if (isSmallScreen && isHiddenPage) {
-  return null;
-}
+    return null;
+  }
 
   return (
-    <div>
-    <header className="w-full h-[70px] sm:h-[90px] bg-white flex justify-between items-center backdrop-blur-[6px] xl:px-20 xl:py-[25px] md:p-[20px] p-[15px] relative z-10 gap-0 shadow-sm">
+   <div className="w-full px-4 sm:px-6"> {/* Container with safe padding */}
+  <header
+    className="w-full max-w-[1348px] h-[82px] 
+               flex justify-between items-center 
+               gap-2 rounded-[90px] shadow-sm 
+               bg-[rgba(255,255,255,0.12)] backdrop-blur-[8px] 
+               relative z-10 mx-auto
+               px-6 sm:px-8 md:px-10 lg:px-12  // More reasonable padding
+               min-[440px]:h-[70px] max-[439px]:h-[64px]"
+    style={{
+      top: "24px",
+      opacity: 1,
+      position: "relative",
+    }}
+  >
 
 
-       <img
-          className="cursor-pointer max-[400px]:w-[50%]"
+
+        <img
+          className="w-[172.75px] h-[34px] cursor-pointer max-[400px]:w-[50%]"
           onClick={() => {
             navigate("/");
           }}
           src={logoImg}
           alt="Logo"
         />
-        {!["sign-in", "sign-up", "resetpopup", "signuppopup", "otp", "signupotp", "resetpassword", "heroforgetpg"].includes(endpoint) && (
+        {/* Want to hide the navbar -add the page name below */}
+        {![].includes(endpoint) && (
           <nav>
-            <ul
-              className={`hidden gap-12 md:gap-8 min-[900px]:flex`}
-              style={{ listStyle: "none" }}
-            >
-              <li>
-                <NavLink
-                  className="text-[20px] font-bold text-[#2a2a2a] cursor-pointer no-underline leading-[100%] hover:text-[#007b82] NavLink visited:font-bold"
-                  to="/"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/products"
-                  onClick={() => {
-                    setShowSideBar(false);
-                  }}
-                  className="text-[20px] font-bold text-[#2a2a2a] cursor-pointer no-underline leading-[100%] hover:text-[#007b82]"
-                >
-                  Products
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="text-[20px] font-bold text-[#2a2a2a] cursor-pointer no-underline leading-[100%] hover:text-[#007b82] NavLink visited:font-bold"
-                  to="/pricing"
-                  onClick={() => {
-                    setShowSideBar(false);
-                  }}
-                >
-                  Pricing
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  onClick={() => {
-                    setShowSideBar(false);
-                  }}
-                  className="text-[20px] font-bold text-[#2a2a2a] cursor-pointer no-underline leading-[100%] hover:text-[#007b82] NavLink visited:font-bold"
-                  to="/api"
-                >
-                  API
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="text-[20px] font-bold text-[#2a2a2a] cursor-pointer no-underline leading-[100%] hover:text-[#007b82] NavLink visited:font-bold"
-                  to="/contact"
-                >
-                  Contact Us
-                </NavLink>
-              </li>
+  <ul
+  className="hidden min-[900px]:flex justify-between self-start
+             w-[477px] h-[32px]  opacity-100 list-none"
+>
+
+
+<div
+  className="w-[477px] h-[32px] flex justify-center items-center gap-[4px] px-[8px] opacity-100"
+>
+
+
+  {[
+    { to: "/", label: "Home" },
+    { to: "/products", label: "Products" },
+    { to: "/pricing", label: "Pricing" },
+    { to: "/api", label: "API" },
+    { to: "/contact", label: "Contact Us" },
+  ].map(({ to, label }) => (
+<li key={label}>
+  <NavLink
+  to={to}
+  onClick={() => setShowSideBar(false)}
+  className={({ isActive }) =>
+    `flex items-center justify-center no-underline font-semibold text-[16px] leading-[100%]
+     w-[124px] h-[46px] px-[8px] py-[12px] rounded-[40px] transition-all duration-200
+     tracking-[0%] lora-text ${isActive ? "text-[#8A38F5]" : "text-white"}`
+  }
+  style={({ isActive }) =>
+    isActive
+      ? {
+          borderBottom: "1px solid",
+          width: "64px",
+          height: "46px",
+          borderImage:
+            "linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, #8A38F5 30%, #8A38F5 70%, rgba(255, 255, 255, 0.1) 100%) 1",
+        }
+      : {}
+  }
+>
+  {label}
+</NavLink>
+
+</li>
+
+
+  ))}
+</div>
+
+
             </ul>
           </nav>
         )}
@@ -492,7 +503,6 @@ export default function Header() {
                   </filter>
                 </defs>
               </svg>
-
               <svg
                 className="group-hover:rotate-180 transition-all"
                 xmlns="http://www.w3.org/2000/svg"
@@ -532,20 +542,54 @@ export default function Header() {
               </div>
             </div>
           ) : (
-            <div className="min-[900px]:flex hidden  gap-[24px]">
-              <NavLink
-                to={"/sign-in"}
-                className="w-[107px] h-[39px] text-[20px] font-semibold leading-[100%] border bg-white text-[#007b82] cursor-pointer flex justify-center items-center no-underline rounded-[5px] border-solid border-[#007b82]  active:bg-[#007b82] active:text-white"
-              >
-                Log In
-              </NavLink>
-              <NavLink
-                to={"/sign-up"}
-                className="w-[107px] h-[39px] text-[20px] font-semibold leading-[100%] border bg-[#007b82] text-white cursor-pointer flex justify-center items-center no-underline rounded-[5px] border-solid border-white active:bg-white active:text-[white] focus:text-white"
-              >
-                <div className="text-[white]">Sign Up</div>
-              </NavLink>
-            </div>
+<div
+  className="min-[900px]:flex hidden gap-[8px] w-[290px] h-[60px] p-[8px] rounded-[30px] border border-transparent bg-clip-padding relative"
+  style={{
+    background: `
+      linear-gradient(92.88deg, rgba(255, 255, 255, 0.1) -0.52%, rgba(0, 176, 186, 0.1) 99.46%) border-box,
+      linear-gradient(#8A38F51A, #8A38F51A) padding-box
+    `,
+    borderWidth: "1px",
+    borderRadius: "30px",
+    opacity: 1,
+  }}
+>
+ <NavLink
+  to="/sign-in"
+  className="w-[113px] h-[39px] px-[30px] py-[10px] flex items-center justify-center 
+             whitespace-nowrap no-underline rounded-[30px] cursor-pointer
+             bg-[#8A38F533] border border-[#FFFFFF1A] 
+             active:bg-[#007b82] active:text-white
+             text-[#FFFFFF] font-inter font-semibold text-[16px] leading-[100%] tracking-[0%] lora-text"
+>
+  Sign In
+</NavLink>
+
+
+
+
+    <NavLink
+  to="/sign-up"
+  className="w-[153px] h-[44px] px-[30px] py-[10px] gap-[10px] flex items-center justify-center 
+             no-underline rounded-[30px] border border-white 
+             bg-[linear-gradient(93.98deg,rgba(138,56,245,0.7)_3.25%,rgba(194,44,162,0.7)_102.29%)] 
+             text-white text-[16px] font-semibold leading-[100%] cursor-pointer 
+             active:opacity-90 focus:outline-none"
+>
+  <span className="lora-text">Sign Up</span>
+  <div className="relative w-[24px] h-[24px]">
+    <img
+      src={arrow}
+      alt="Arrow"
+      className="w-[15px] h-[15px] absolute top-[4.5px] left-[4.5px] opacity-100 border border-white"
+      style={{ borderWidth: "1.5px" }}
+    />
+  </div>
+</NavLink>
+
+
+          
+             </div>
           )}
         </div>
         <div
