@@ -128,11 +128,9 @@
 // }
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
-import { useEffect, useState } from "react";
 import Banner1 from "../../assets/pricing-pg/GroupCollage.png";
 import Banner2 from "../../assets/pricing-pg/GroupCollage.png";
 import Frame from "../../assets/pricing-pg/Frame.png";
-import Frame1 from "../../assets/pricing-pg/Frame1.png";
 
 import CreditStats from "./CreditStats";
 import Graph from "./Graph";
@@ -144,85 +142,89 @@ import UiPlans from "./UiPlans";
 import ConformationPage from "./ConformationPage";
 import Pay from "./Pay";
 import { Link } from "react-router-dom";
+import Frame1 from "../../assets/pricing-pg/Frame1.png";//section 6 background
+
 
 
 
 export default function HeroPricing() {
 
 
- const features = [
-  "Unlimited Designs",
-  "High-Resolution 4K Images",
-  "Watermark-Free Downloads",
-  "Highly Advanced AI Designs",
-  "24/7 Support Assistance",
-  "Cancel Anytime",
-];
-
-const [bgImage, setBgImage] = useState(Frame);
-
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth <= 440) {
-      setBgImage(Frame1);
-    } else {
-      setBgImage(Frame);
-    }
-  };
-
-  handleResize(); // Initial background check
-  window.addEventListener("resize", handleResize);
-
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-
+  const features = [
+    "Unlimited Designs",
+    "High-Resolution 4K Images",
+    "Watermark-Free Downloads",
+    "Highly Advanced AI Designs",
+    "24/7 Support Assistance",
+    "Cancel Anytime",
+  ];
 
   return (
 
     <div>
       {/* section-1 */}
 <section
-  className="relative w-full h-[400px] md:h-[400px] flex items-center justify-center bg-[#000000] overflow-hidden
-           max-[440px]:flex max-[440px]:flex-col
-           max-[440px]:w-[440px] max-[440px]:h-[300px]
-           max-[440px]:pt-[60px] max-[440px]:pr-[40px] max-[440px]:pb-[60px] max-[440px]:pl-[40px]"
->
-  {/* Animated Background Elements */}
-  <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
-    {/* Banner 1 - Continuous Up and Down Motion */}
-    <div
-      className="absolute w-[700px] h-[1200px] rotate-[-45deg] opacity-[0.30]"
-      style={{
-        left: '1%',
-        top: '-50%',
-        transformOrigin: 'center center',
-        animation: 'bounceVertical 15s linear infinite'
-      }}
-    >
-      <img
-        src={Banner1}
-        alt="Diagonal Grid 1"
-        className="w-full h-full object-cover"
-      />
-    </div>
+  className="relative w-full flex items-center justify-center bg-[#000000] overflow-hidden
+             h-[400px]  // default height for all
 
-    {/* Banner 2 - Continuous Down and Up Motion */}
-    <div
-      className="absolute w-[700px] h-[1200px] rotate-[-45deg] opacity-[0.30]"
-      style={{
-        left: '44%',
-        top: '-160%',
-        transformOrigin: 'center center',
-        animation: 'bounceVerticalReverse 15s linear infinite'
-      }}
-    >
-      <img
-        src={Banner2}
-        alt="Diagonal Grid 2"
-        className="w-full h-full object-cover"
-      />
-    </div>
+             max-[440px]:flex max-[440px]:flex-col
+             max-[440px]:h-[300px] max-[440px]:py-[60px] max-[440px]:px-[40px]
+
+             min-[441px]:max-[768px]:h-[300px]  // ✅ only tablet height
+             min-[441px]:max-[768px]:pt-[60px]
+             min-[441px]:max-[768px]:pr-[40px]
+             min-[441px]:max-[768px]:pb-[60px]
+             min-[441px]:max-[768px]:pl-[40px]"
+>
+
+  {/* Animated Background Elements */}
+  <div
+  className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden
+
+    min-[441px]:max-[768px]:w-[768px]
+    min-[441px]:max-[768px]:h-[300px]
+    min-[441px]:max-[768px]:pt-[60px]
+    min-[441px]:max-[768px]:pr-[40px]
+    min-[441px]:max-[768px]:pb-[60px]
+    min-[441px]:max-[768px]:pl-[40px]"
+>
+
+  {/* Banner 1 - Now using Tailwind for responsive positioning */}
+  <div
+    className="absolute w-[700px] h-[1200px] rotate-[-45deg] opacity-[0.30]
+              left-[1%] top-[-50%]
+              max-[440px]:w-[260px] max-[440px]:h-[800px]
+              max-[440px]:left-[-10%] max-[440px]:top-[-60%]"
+    style={{
+      transformOrigin: 'center center',
+      animation: 'bounceVertical 15s linear infinite'
+    }}
+  >
+    <img
+      src={Banner1}
+      alt="Diagonal Grid 1"
+      className="w-full h-full object-cover"
+    />
   </div>
+
+  {/* Banner 2 - Now using Tailwind for responsive positioning */}
+  <div
+    className="absolute w-[700px] h-[1200px] rotate-[-45deg] opacity-[0.30]
+              left-[44%] top-[-160%]
+              max-[440px]:w-[260px] max-[440px]:h-[800px]
+              max-[440px]:left-[40%] max-[440px]:top-[-120%]"
+    style={{
+      transformOrigin: 'center center',
+      animation: 'bounceVerticalReverse 15s linear infinite'
+    }}
+  >
+    <img
+      src={Banner2}
+      alt="Diagonal Grid 2"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</div>
 
   {/* Content (unchanged) */}
   <div
@@ -288,21 +290,21 @@ useEffect(() => {
 
 
       {/* section-4  */}
-{/* 
+
       <section
         className="hidden bg-[#001E20] text-white text-center py-16 px-4 mb-[120px]
+            max-[440px]:hidden
              max-[440px]:bg-[#00B0BA14] max-[440px]:flex max-[440px]:flex-col
              max-[440px]:w-[440px] max-[440px]:h-[245px] 
              max-[440px]:pt-[40px] max-[440px]:pr-[20px] max-[440px]:pb-[40px] max-[440px]:pl-[20px]
              max-[440px]:gap-[40px]"
-      > */}
+      >
         {/* Heading */}
         {/* Desktop & Tablet version: shown only on >440px */}
-        {/* <div className="max-[440px]:hidden">
+        <div className="max-[440px]:hidden">
           <h2 className="text-[44px] font-semibold leading-[140%] text-center mb-6">
             Ready to Experience the Power?
           </h2>
-
           <Link to="/Sign-in">
             <button
               className="text-white font-bold py-3 px-8 rounded-md text-[20px] transition-all duration-300 
@@ -315,30 +317,26 @@ useEffect(() => {
               Get Started for Free
             </button>
           </Link>
-
           <p className="mt-6 text-[16px] leading-[28px] font-[400] text-[#f5f5f5]">
             No credit card needed. Sign up and explore your free credits today.
           </p>
-        </div> */}
-
+        </div>
         {/* Mobile version: shown only on <441px */}
-        {/* <div className="hidden max-[440px]:block">
+        <div className="hidden max-[440px]:block">
           <h2
             className="w-[400px] h-[24px] font-['Inter'] font-semibold text-[20px] leading-[100%]
                tracking-[0] text-center text-[#000000]"
           >
             There’s a <span className="text-[#007B82]">Plan </span>for Creator
           </h2>
-
           <p
             className="w-[400px] h-[17px] font-['Inter'] font-[400] text-[14px] leading-[100%]
                tracking-[0] text-center text-[#000000] mt-4"
           >
             From casual users to design pros, we’ve got you covered
-          </p> */}
-
+          </p>
           {/* ✅ Center the button below */}
-          {/* <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-6">
             <Link to="/Sign-in">
               <button
                 className="bg-gradient-to-r from-[#00B0BA] via-[black] to-[#007B82] hover:from-cyan-600  
@@ -354,37 +352,56 @@ useEffect(() => {
             </Link>
           </div>
         </div>
- </section> */}
+      </section>
 
       {/* section-5  */}
       {/* <PricingTable /> */}
       <UiPlans />
 
-      {/* section-6  */}
+     {/* section-6  */}
 
-      <div
-        className="h-[497px] text-white py-12 px-4 md:px-16 text-center  
-             max-[440px]:bg-transparent max-[440px]:flex max-[440px]:flex-col 
-             max-[440px]:w-[440px] max-[440px]:h-[486px] 
-             max-[440px]:pt-[40px] max-[440px]:pr-[20px] 
-             max-[440px]:pb-[40px] max-[440px]:pl-[20px] 
-             max-[440px]:gap-[48px]"
-       style={{
-  backgroundImage: `url(${bgImage})`,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-}}
+     <div
+  className="
+    h-[497px] text-white py-12 px-4 md:px-16 text-center  
 
-      >
+    max-[440px]:bg-transparent max-[440px]:flex max-[440px]:flex-col 
+    max-[440px]:w-[440px] max-[440px]:h-[486px] 
+    max-[440px]:pt-[40px] max-[440px]:pr-[20px] 
+    max-[440px]:pb-[40px] max-[440px]:pl-[20px] 
+    max-[440px]:gap-[48px]
+
+    /* Tablet styles (441px to 768px) */
+    min-[441px]:max-[768px]:w-[768px]
+    min-[441px]:max-[768px]:h-[484px]
+    min-[441px]:max-[768px]:gap-[48px]
+    min-[441px]:max-[768px]:pt-[60px]
+    min-[441px]:max-[768px]:pr-[40px]
+    min-[441px]:max-[768px]:pb-[60px]
+    min-[441px]:max-[768px]:pl-[40px]
+  "
+  style={{
+    backgroundImage: `url(${Frame1})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  }}
+>
 
 
-       
-         <h2
+
+     <h2
   className="
     text-[32px] font-bold leading-[64px] text-center text-white 
     max-[440px]:text-[20px] max-[440px]:leading-[140%] 
     max-[440px]:w-[400px] max-[440px]:h-[28px] max-[440px]:mx-auto
+
+    /* Tablet styles */
+    min-[441px]:max-[768px]:w-[688px]
+    min-[441px]:max-[768px]:h-[34px]
+    min-[441px]:max-[768px]:text-[24px]
+    min-[441px]:max-[768px]:font-[700]
+    min-[441px]:max-[768px]:leading-[140%]
+    min-[441px]:max-[768px]:text-center
   "
   style={{
     fontFamily: "Inter",
@@ -398,20 +415,59 @@ useEffect(() => {
   Why Upgrade to <span className="text-[#FFB900]">Premium</span>?
 </h2>
 
+
  <div className="hidden [@media(min-width:441px)]:block ">
           <div className="mt-[-10px] inline-block mb-8">
-            <span
-              className="w-[295px] h-[64px] text-[22px] leading-[44px] text-center text-white text-sm font-semibold px-[30px] py-[10px] rounded-[50px] relative top-[55px]"
-              style={{
-                background: "linear-gradient(180deg, #FBA716 8.5%, #90600D 100%)",
-              }}
-            >
+           <span
+  className="
+    w-[295px] h-[64px] text-[22px] leading-[44px] text-center text-white 
+    text-sm font-semibold px-[30px] py-[10px] rounded-[50px] relative top-[55px]
+
+    /* Tablet styles */
+    min-[441px]:max-[768px]:w-[207px]
+    min-[441px]:max-[768px]:h-[38px]
+    min-[441px]:max-[768px]:px-[12px]
+    min-[441px]:max-[768px]:py-[8px]
+    min-[441px]:max-[768px]:rounded-[50px]
+  "
+  style={{
+    background: "linear-gradient(180deg, #FBA716 8.5%, #90600D 100%)",
+    opacity: 1,
+    transform: "rotate(0deg)",
+  }}
+>
+
               Features of Paid Plans
             </span>
           </div>
 
-          <div className="border-[2px] border-solid border-teal-700 rounded-[30px] px-[60px] py-[80px] max-w-[1200px] mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+        <div
+  className="
+    border-[2px] border-solid border-teal-700 rounded-[30px] 
+    px-[60px] py-[80px] max-w-[1200px] mx-auto
+
+    /* Tablet styles */
+    min-[441px]:max-[768px]:w-[688px]
+    min-[441px]:max-[768px]:h-[282px]
+    min-[441px]:max-[768px]:rounded-[30px]
+    min-[441px]:max-[768px]:gap-[10px]
+    min-[441px]:max-[768px]:border-[1px]
+    min-[441px]:max-[768px]:p-[10px]
+  "
+>
+
+           <div
+  className="
+    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left
+
+    /* Tablet styles */
+    min-[441px]:max-[768px]:w-[668px]
+    min-[441px]:max-[768px]:h-[262px]
+    min-[441px]:max-[768px]:gap-[50px]
+    min-[441px]:max-[768px]:p-[35px_8px]
+  "
+>
+
               {features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   {/* Square with gradient and transparent check */}
@@ -501,10 +557,8 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* section-7  */}
-
+      {/* section-7 */}
       {/* <PricingFaq /> */}
-
       {/* section 8  */}
     </div>
   );
