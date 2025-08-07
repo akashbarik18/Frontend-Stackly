@@ -1,65 +1,113 @@
+// import React from "react";
+// import logo from "../../assets/pricing-pg/logo.png"; // replace with your logo path
+// import iconChat from "../../assets/pricing-pg/chat.png"; // faded background icon
+// import iconNote from "../../assets/pricing-pg/pad.png"; // another background icon
+
+// const ContactBanner = () => {
+//   return (
+//     <section className="relative flex flex-col items-center justify-center w-full min-h-[425px] px-4 py-20 bg-white overflow-hidden gap-[30px]">
+//       {/* Background icons */}
+//       <img src={iconChat} alt="" className="absolute top-[10px] left-20" />
+//       <img src={iconChat} alt="" className="absolute  left-0 bottom-0" />
+//       <img
+//         src={iconNote}
+//         alt=""
+//         className="absolute right-[300px] top-[80px]"
+//       />
+//       {/* Logo */}
+//       <img src={logo} alt="StacklyAI logo" className="w-[88.5px] h-[118px]" />
+
+//       {/* Heading */}
+//       <h2 className=" max-w-[700px] leading-[100%] text-[38px] font-semibold text-center text-[#2A2A2A]">
+//         Get in touch with{" "}
+//         <span className="text-[#00B0BA] font-bold">STACKLYAI</span> right now!
+//       </h2>
+//     </section>
+//   );
+// };
+
+// export default ContactBanner;
 
 import React from "react";
 import logo from "../../assets/pricing-pg/logo.png"; // replace with your logo path
 import iconChat from "../../assets/pricing-pg/chat.png"; // faded background icon
 import iconNote from "../../assets/pricing-pg/pad.png"; // another background icon
+import backgroundImage from "../../assets/pricing-pg/Contact us.png";
+import handShake from "../../assets/pricing-pg/handShake.png";
 
 const ContactBanner = () => {
   return (
-   <section className="relative flex flex-col items-center justify-center w-full min-h-[425px] px-4 py-20 bg-white overflow-hidden gap-[30px]
-  max-[440px]:flex max-[440px]:flex-col max-[440px]:w-[440px] max-[440px]:min-h-[195px]
-  max-[440px]:px-[20px] max-[440px]:py-[40px] max-[440px]:gap-[27px]">
+ <section
+        className="w-full min-h-[1926px] -mt-[75px] pt-[75px] flex flex-col items-center bg-no-repeat bg-top"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        transform: "rotate(0deg)",
+      }}
+    >
+      {/* Your content goes here */}
+         
+    {/* Top form div - horizontally centered */}
+<div class="absolute w-[668px] h-[691px] top-[171px] left-1/2 -translate-x-1/2 opacity-100 rotate-0 flex flex-col gap-[28px]">
 
-      {/* <div className="absolute top-0 left-0 right-0 max-[440px]:flex hidden items-center justify-between w-full px-5 py-4  z-10">
-  <div className="flex items-center gap-2">
-   
-    <div className="w-[24px] h-[24px] flex items-center justify-center">
+  <div class="w-[373px] h-[120px] flex flex-col gap-[13px] mx-auto">
+    
+    <div class="w-[308px] h-[47px] mx-auto flex items-center justify-between">
+
+      <div class="w-[276px] h-[47px] flex items-center">
+        <p class="text-white text-[32px] leading-[100%] font-[400] font-[Poppins] whitespace-nowrap">
+          Let’s Have a Chat
+        </p>
+      </div>
+
      
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-[16px] h-[16px]"
-      >
-        <path
-          d="M15 18L9 12L15 6"
-          stroke="#2A2A2A"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <div class="w-[32px] h-[32px]">
+        <img src={handShake} alt="chat icon" class="w-full h-full object-contain" />
+      </div>
     </div>
 
-    
-    <span className="text-[#2A2A2A] font-inter font-bold text-[16px] leading-[140%]">
-      Back
-    </span>
+    <div class="w-[373px] h-[60px] flex items-center justify-center text-center">
+      <p class="text-white/80 text-[20px] leading-[100%] tracking-[0%] font-[400] font-[Poppins]">
+        Curious how AI can style your space? Let’s talk.
+      </p>
+    </div>
   </div>
-</div> */}
 
-      <img src={iconChat} alt="" className="absolute top-[10px] left-20" />
-      <img src={iconChat} alt="" className="absolute  left-0 bottom-0" />
-      <img
-        src={iconNote}
-        alt=""
-        className="absolute right-[300px] top-[80px]"
+
+ <div class="w-full flex justify-center">
+  <div class="w-[668px] h-[84px] flex gap-[26px] opacity-100 rotate-0">
+    <div class="w-[321px] h-[84px] flex flex-col gap-[12px]">
+      <div class="w-[321px] h-[24px]">
+        <p class="text-white text-[16px] leading-[100%] font-[400] font-[Poppins]">
+          First Name
+        </p>
+      </div>
+      <input
+        type="text"
+        placeholder="John"
+        class="w-[321px] h-[48px] border border-[#FFFFFF66] bg-white/10 rounded-[12px] px-[12px] text-[#E0E0E0EE] text-[16px] leading-[100%] font-[400] font-[Poppins] placeholder-[#E0E0E0EE] outline-none"
       />
-      {/* Logo */}
-     <img
-  src={logo}
-  alt="StacklyAI logo"
-  className="w-[88.5px] h-[118px] max-[440px]:w-[48px] max-[440px]:h-[64px]"
-/>
+    </div>
+    <div class="w-[321px] h-[84px] flex flex-col gap-[12px]">
+  <div class="w-[321px] h-[24px]">
+    <p class="text-white text-[16px] leading-[100%] font-[400] font-[Poppins]">
+      Last Name
+    </p>
+  </div>
+  <input
+    type="text"
+    placeholder="Poul"
+    class="w-[321px] h-[48px] border border-white bg-white/10 rounded-[12px] px-[12px] 
+           text-[#E0E0E0EE] text-[16px] leading-[100%] font-[400] font-[Poppins] 
+           placeholder-[#E0E0E0EE] outline-none"
+  />
+</div>
+
+  </div>
+</div>
+
+</div>
 
 
-      {/* Heading */}
-      <h2 className="max-w-[700px] leading-[100%] text-[38px] font-semibold text-center text-[#2A2A2A] max-[440px]:w-[400px] max-[440px]:h-[24px] max-[440px]:text-[20px] max-[440px]:font-semibold max-[440px]:leading-[100%]">
-        Get in touch with{" "}
-        <span className="text-[#00B0BA] font-bold">STACKLYAI</span> right now!
-      </h2>
 
     </section>
   );
