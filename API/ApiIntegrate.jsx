@@ -498,7 +498,7 @@ const StacklyAPIIntegration = () => {
        <div
   className="w-[120px] h-[120px] rounded-full absolute top-0 left-1/2 translate-x-[-50%] blur-[80px] z-0
              min-[441px]:max-[768px]:h-[684px]"
-  style={{ backgroundColor: "#00B0BAB2" }}
+  style={{ backgroundColor: "#000000" }}
 />
 
       )}
@@ -574,7 +574,7 @@ const StacklyAPIIntegration = () => {
   }}
 >
   {integrationData.map((item, index) => (
- <motion.div
+<motion.div
   key={index}
   className="relative w-full max-w-[390px] h-[300px] p-12 bg-black flex flex-col justify-center items-start gap-5
              shadow-[4px_4px_12px_0px_#007B8229] rounded-[40px] text-left
@@ -586,6 +586,7 @@ const StacklyAPIIntegration = () => {
       4px 4px 12px 0px #007B8229,
       inset 2px 2px 16px 0px #FFFFFF14
     `,
+    overflow: 'hidden' // Add this line to clip the glowing effects
   }}
   variants={{
     hidden: { y: 20, opacity: 0 },
@@ -617,37 +618,37 @@ const StacklyAPIIntegration = () => {
     }}
   />
 
-{/* 🔵 Glowing Div 1 – Left to Right */}
+{/* 🔵 Glowing Div 1 – Top Right (moves Left to Right) */}
 <motion.div
   className="absolute w-[134px] h-[134px] rounded-full pointer-events-none"
   style={{
-    top: '-40px',
-    left: '-40px',
-    background: 'rgba(194, 44, 162, 0.5)', // More visible
-    filter: 'blur(100px)',
-    zIndex: 0, // Bring it just below content, not behind everything
-    willChange: 'transform',
-  }}
-  animate={{
-    x: hoveredIndex === index ? 40 : 0,
-    opacity: hoveredIndex === index ? 1 : 0.8,
-    transition: { duration: 0.5 },
-  }}
-/>
-
-{/* 🔵 Glowing Div 2 – Right to Left */}
-<motion.div
-  className="absolute w-[134px] h-[134px] rounded-full pointer-events-none"
-  style={{
-    bottom: '-40px',
-    right: '-40px',
-    background: 'rgba(194, 44, 162, 0.5)', // More visible
+    top: '0px',                 
+    right: '0px',                
+    background: 'rgba(194, 44, 162, 0.5)',
     filter: 'blur(100px)',
     zIndex: 0,
     willChange: 'transform',
   }}
   animate={{
-    x: hoveredIndex === index ? -40 : 0,
+    x: hoveredIndex === index ? -20 : 0,   // Move left on hover
+    opacity: hoveredIndex === index ? 1 : 0.8,
+    transition: { duration: 0.5 },
+  }}
+/>
+
+{/* 🔵 Glowing Div 2 – Bottom Left (moves Right to Left) */}
+<motion.div
+  className="absolute w-[134px] h-[134px] rounded-full pointer-events-none"
+  style={{
+    bottom: '0px',              
+    left: '0px',                 
+    background: '#C22CA24D',
+    filter: 'blur(100px)',
+    zIndex: 0,
+    willChange: 'transform',
+  }}
+  animate={{
+    x: hoveredIndex === index ? 20 : 0,   // Move right on hover
     opacity: hoveredIndex === index ? 1 : 0.8,
     transition: { duration: 0.5 },
   }}
