@@ -176,140 +176,67 @@ import { Link } from "react-router-dom";
 import Coins from "../../assets/product-pg/GroupCoin.png";
 import StarLight from "../../assets/product-pg/StarLight.png";
 import bg from "../../assets/product-pg/bg.png";
-import Ellipseblur from "../../assets/product-pg/Ellipseblur.png";
-import packageBg from "../../assets/product-pg/packageBg.png";
+import Ellipseblur from "../../assets/product-pg/section3Bg.png";
+
 import Rectangle from "../../assets/product-pg/Rectangle.png";
 import EclicpBlur2 from "../../assets/product-pg/EclicpBlur2.png";
 
 export default function SignUpBanner() {
   return (
 // NEW FIGMA DISGINE
-<section className="w-full h-[647px] bg-black relative overflow-hidden">
-  <div
-    className="absolute w-[196px] h-[196px] top-[0px] left-[-16px] opacity-100 rotate-0"
-    style={{
-      backgroundImage: `url(${Ellipseblur})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  ></div>
-  {/* coin img */}
- <div
-  className="absolute w-[123.61px] h-[110.34px] z-[9999]" 
-  style={{ top: "476px", left: "1190px" }}
->
-  <img
-    src={Coins}
-    alt="Coins"
-    className="w-full h-full object-contain pointer-events-none"
-  />
-</div>
-{/* star light */}
-<div
-  className="absolute w-[147.53px] h-[140px] z-[9999]"
-  style={{ top: "48px", left: "1200px" }} // Change position as needed
->
-  <img
-    src={StarLight}
-    alt="Star Light"
-    className="w-full h-full object-contain pointer-events-none"
-  />
-</div>
-{/* BLUR DIV */}
-<div className="absolute w-[19px] h-[26px] top-[523.91px] left-[140.31px] rotate-[34.5deg] bg-[#FFB200] opacity-60 blur-[12px] shadow-[0_0_40px_20px_rgba(255,178,0,0.6)] rounded-full z-[9999]"></div>
 
-
-
-
-  {/* <div
-  className="absolute w-[888px] h-[888px] top-[-120px] left-[506px] opacity-100 rotate-0"
+<section
+  className="w-full mx-auto h-[386px] bg-black relative overflow-hidden bg-cover bg-center"
   style={{
-    backgroundImage: `url(${packageBg})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
-></div> */}
-{/* main div */}
-<div
-  className="absolute w-[1147px] h-[456px] top-[98px] left-1/2 -translate-x-1/2 transform opacity-100 rotate-0 backdrop-blur-sm"
-  style={{
-    backdropFilter: "blur(14px)",
-    WebkitBackdropFilter: "blur(14px)", // For Safari support
+    backgroundImage: `url(${Ellipseblur})`,
   }}
 >
 <div
-  className="absolute w-[1147px] h-[456px] top-0 left-0 rounded-[32px] border-[8px] overflow-hidden"
+  className="absolute w-[717px] h-[241px] flex flex-col items-center gap-[32px] opacity-100 top-1/2 left-1/2"
   style={{
-    background: "#FFD33E1A",
-    
+    transform: "translate(-50%, -50%)",
   }}
 >
-  {/* Rectangle image overlay */}
-  <img 
-    src={Rectangle} 
-    alt="Decorative border"
-    className="absolute w-full h-full object-cover mix-blend-overlay opacity-20" 
+  {/* Top child */}
+  <div
+    className="w-[717px] h-[66px] text-center uppercase text-[42px] leading-[100%] font-normal"
     style={{
-      pointerEvents: 'none' // makes the image non-interactive
-    }}
-  />
-  <div
-  className="absolute w-[263px] h-[37px] left-[442px] rounded-[40px]"
-  style={{
-    background: "linear-gradient(180deg, #E19E2C 0%, #F1E06C 39.19%, #694003 78.38%)",
-  }}
-></div>
-<div className="absolute w-[123.61px] h-[110.34px]" style={{ top: "476px", left: "1215px" }}>
-  <img src={Coins} alt="Coins" className="w-full h-full object-contain pointer-events-none" />
-</div>
-
-
-  <div
-  className="absolute w-[1025px] h-[274px] top-[91.5px] left-[67px] flex flex-col items-center gap-[20px] opacity-100"
->
-  {/* Top Child Div - Heading */}
-  <div className="w-[927px] h-[200px] flex items-center justify-center text-center">
-    <h2
-      className="text-[52px] font-[600] italic leading-[140%]"
-      style={{
-        fontFamily: 'Lora',
-        background: "linear-gradient(180deg, #FFFFFF 11%, #FFD980 48.37%, #FFB300 85.75%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-      }}
-    >
-      Elevate Your Experience with Every High Perk!
-    </h2>
-  </div>
-
-  {/* Bottom Child Div - Button */}
-  <div
-  className="w-[337px] h-[54px] flex items-center justify-center rounded-[58px] border-[2px] px-[146px] py-[12px]"
-  style={{
-    background: "linear-gradient(180deg, #FFF996 -53.7%, #CC8913 40.28%, #9A762A 134.26%)",
-  }}
->
-  <p
-    className="text-[20px] font-medium leading-[100%] text-center whitespace-nowrap"
-    style={{
-      fontFamily: 'poppins-font',
-      color: '#FFFFFF',
+      fontFamily: "Lora, serif",
+      background: "linear-gradient(180deg, #FFFFFF 18.18%, #F8BD00 87.88%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
     }}
   >
-    Activate Pro Subscription
-  </p>
-</div>
+    Join the Pro Experience
+  </div>
 
-</div>
+  {/* Middle child */}
+  <div
+    className="w-[623px] h-[67px] text-center text-white text-[16px] leading-[140%] tracking-[0.3px] font-normal"
+    style={{ fontFamily: "Poppins, sans-serif" }}
+  >
+    Unlock advanced AI styles, high-resolution renders, and unlimited design suggestions for your interiors, exteriors, and beyond. Upgrade now and turn your dream spaces into reality without compromise.
+  </div>
 
+  {/* Bottom child (button) */}
+ <Link to="/sign-in">
+  <button
+    className="w-[271px] h-[64px] flex items-center justify-center gap-[10px] rounded-full px-[30px] py-[10px]"
+    style={{
+      background: "linear-gradient(180deg, #FBA716 8.5%, #90600D 100%)",
+    }}
+  >
+    <span
+      className="text-white text-[22px] font-semibold leading-[44px] text-center"
+      style={{ fontFamily: "Inter, sans-serif" }}
+    >
+      Upgrade to Pro now
+    </span>
+  </button>
+</Link>
 </div>
-
-</div>
-
 
 </section>
-
-
 
 
 
