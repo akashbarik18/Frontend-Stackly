@@ -1069,13 +1069,13 @@ export default function AfterUiPlans() {
   );
 
   const SilverPlan = ({ mobile = false }) => (
-    <div
-      className={`${mobile ? 'w-[340px]' : 'w-full'} rounded-[12px] p-5 border-[2px] border-solid border-[#FFFFFF33] flex flex-col gap-6`}
-      style={{
-       
-        boxShadow: '8px 8px 4px 0px #00000029 inset, -8px -8px 4px 0px #00000029 inset',
-      }}
-    >
+   <div
+  className={`${mobile ? 'w-[340px]' : 'w-full'} rounded-[12px] p-5 border-[2px] border-solid border-[#FFFFFF33] flex flex-col gap-6`}
+  style={{
+    background: 'linear-gradient(180deg, rgba(72, 32, 126, 0.8) 0%, rgba(0, 0, 0, 0.8) 67.57%)',
+    boxShadow: '8px 8px 4px 0px #00000029 inset, -8px -8px 4px 0px #00000029 inset',
+  }}
+>
       <div className="flex flex-col gap-4">
        <div className="flex justify-center items-center">
   <h3 className="text-white text-2xl font-bold">Premium</h3>
